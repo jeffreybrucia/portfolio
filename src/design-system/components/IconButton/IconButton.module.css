@@ -1,0 +1,72 @@
+.button {
+  --_border: var(--color-border);
+  --_fg: var(--color-text);
+  --_fill: var(--color-fill-hover);
+
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--size-icon-button);
+  height: var(--size-icon-button);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--_border);
+  color: var(--_fg);
+  background: transparent;
+  transition:
+    background-color var(--duration-micro) var(--ease-standard),
+    border-color var(--duration-micro) var(--ease-standard),
+    opacity var(--duration-micro) var(--ease-standard);
+}
+
+.inverse {
+  --_border: var(--color-border-inverse);
+  --_fg: var(--color-text-inverse);
+  --_fill: var(--color-fill-inverse-hover);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  transition: transform var(--duration-short) var(--ease-standard);
+}
+
+/* Hover — only on devices that can hover; the parent can drive it too */
+@media (hover: hover) {
+  .button:hover,
+  :global([data-interactive-parent]:hover) .button {
+    background-color: var(--_fill);
+    border-color: var(--_fg);
+  }
+
+  .nudge-up-right:hover .icon,
+  :global([data-interactive-parent]:hover) .nudge-up-right .icon {
+    transform: translate(2px, -2px);
+  }
+
+  .nudge-left:hover .icon,
+  :global([data-interactive-parent]:hover) .nudge-left .icon {
+    transform: translateX(-3px);
+  }
+
+  .nudge-right:hover .icon,
+  :global([data-interactive-parent]:hover) .nudge-right .icon {
+    transform: translateX(3px);
+  }
+}
+
+:global([data-interactive-parent]:focus-visible) .button {
+  background-color: var(--_fill);
+  border-color: var(--_fg);
+}
+
+/* Touch feedback */
+.button:active,
+:global([data-interactive-parent]:active) .button {
+  background-color: var(--_fill);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--_fg);
+  outline-offset: 3px;
+  border-radius: var(--radius-full);
+}

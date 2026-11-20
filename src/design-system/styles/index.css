@@ -1,0 +1,4 @@
+/* Global entry for the design system. Imported once in src/main.tsx. */
+@import '../tokens/tokens.css';
+@import './base.css';
+@import '../motion/view-transitions.css';

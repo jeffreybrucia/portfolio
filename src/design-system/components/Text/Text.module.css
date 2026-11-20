@@ -1,0 +1,104 @@
+.text {
+  margin: 0;
+}
+
+/* Display — Newsreader. Used sparingly. */
+.hero,
+.caseTitle,
+.section {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-optical-sizing: auto;
+  letter-spacing: var(--tracking-display);
+}
+
+.hero {
+  font-size: var(--text-hero);
+  line-height: var(--leading-display);
+}
+
+.caseTitle {
+  font-size: var(--text-case-title);
+  line-height: var(--leading-display);
+}
+
+.section {
+  font-size: var(--text-section);
+  line-height: var(--leading-heading);
+}
+
+/* Functional — Geist. Hierarchy via size and weight only. */
+.subsection {
+  font-size: var(--text-subsection);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-heading);
+}
+
+.cardTitle {
+  font-size: var(--text-card-title);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-heading);
+}
+
+.bodyLg {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body);
+}
+
+.body {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.bodySm {
+  font-size: var(--text-body-sm);
+  line-height: 1.5;
+}
+
+.label {
+  font-size: var(--text-label);
+  line-height: 1.4;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0;
+}
+
+.labelSm {
+  font-size: var(--text-label-sm);
+  line-height: 1.4;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.stat {
+  display: block;
+  font-size: var(--text-stat);
+  line-height: 1;
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.serif {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+/* Tones */
+.tone-default { color: var(--color-text); }
+.tone-secondary { color: var(--color-text-secondary); }
+.tone-inverse { color: var(--color-text-inverse); }
+.tone-inverseSecondary { color: var(--color-text-inverse-secondary); }
+.tone-inherit { color: inherit; }

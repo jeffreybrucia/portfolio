@@ -1,0 +1,100 @@
+.card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-card);
+  color: var(--color-text-inverse);
+  /* contain the hover scale inside the card's boundaries */
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.media > * {
+  transition: transform var(--duration-image) var(--ease-image);
+  will-change: transform;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-4);
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity var(--duration-short) var(--ease-standard);
+}
+
+@media (min-width: 640px) {
+  .overlay {
+    padding: var(--space-6);
+  }
+}
+
+.top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  min-height: var(--size-icon-button);
+  color: var(--color-text-inverse);
+  opacity: 0.92;
+}
+
+.mark :global(svg),
+.mark :global(img) {
+  height: 20px;
+  width: auto;
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-1);
+  max-width: 36ch;
+}
+
+.category {
+  margin-bottom: var(--space-1);
+}
+
+.summary {
+  margin-top: var(--space-1);
+}
+
+/* Hover: quiet image scale, overlay & arrow handled by Scrim / IconButton */
+@media (hover: hover) {
+  .card:hover .media > * {
+    transform: scale(1.03);
+  }
+}
+
+/* Touch feedback */
+.card:active .media > * {
+  transform: scale(1.015);
+  transition-duration: var(--duration-micro);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-card);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover .media > :first-child,
+  .card:active .media > * {
+    transform: none;
+  }
+}

@@ -1,0 +1,28 @@
+.intro {
+  display: grid;
+  gap: var(--space-4);
+  padding-top: calc(var(--size-nav) + clamp(var(--space-8), 5vw, var(--space-16)));
+  padding-bottom: clamp(var(--space-8), 5vw, var(--space-16));
+}
+
+.eyebrow {
+  display: block;
+}
+
+.headline {
+  max-width: 14ch;
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    max-width: 20ch;
+  }
+}
+
+.lede {
+  margin-top: var(--space-2);
+}
+
+.work {
+  padding-bottom: var(--section-gap);
+}

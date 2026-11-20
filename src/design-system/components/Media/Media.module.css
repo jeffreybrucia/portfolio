@@ -1,0 +1,71 @@
+.media {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-muted);
+  isolation: isolate;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+}
+
+.radiusCard {
+  border-radius: var(--radius-card);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+/* Clearly-identified placeholder: never mistaken for real work. */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(120% 80% at 20% 10%, #5b5750 0%, transparent 60%),
+    radial-gradient(90% 70% at 85% 35%, #3d3a35 0%, transparent 65%),
+    radial-gradient(140% 90% at 50% 110%, #1d1c1a 10%, transparent 70%),
+    #2b2926;
+}
+
+.placeholder::after {
+  /* faint diagonal hatching marks it as a stand-in */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 14px);
+}
+
+.placeholderLabel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-1);
+  justify-items: center;
+  padding: var(--space-2) var(--space-3);
+  border: 1px dashed rgba(255, 255, 255, 0.32);
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-label-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.placeholderNote {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: var(--weight-regular);
+  opacity: 0.8;
+}

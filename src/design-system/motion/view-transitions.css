@@ -1,0 +1,126 @@
+/*
+ * View Transition choreography.
+ *
+ * The router sets html[data-transition] to one of:
+ *   page          – default cross-fade between routes
+ *   project-enter – card → full-viewport case study hero
+ *   project-exit  – case study hero → its card on the home grid
+ *
+ * Named elements:
+ *   project-media  – the card image / case study hero image (shared element)
+ *   case-hero-meta – case study title block over the hero
+ *   site-nav       – the navigation bar (kept stable)
+ */
+
+/* --- Defaults ---------------------------------------------------------- */
+::view-transition-group(root) {
+  animation-duration: var(--duration-short);
+  animation-timing-function: var(--ease-standard);
+}
+
+::view-transition-old(root) {
+  animation: vt-fade-out var(--duration-short) var(--ease-standard) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in var(--duration-medium) var(--ease-standard) both;
+}
+
+::view-transition-group(site-nav) {
+  animation-duration: var(--duration-short);
+}
+
+/* --- Shared element: project media ------------------------------------- */
+::view-transition-group(project-media) {
+  animation-duration: var(--duration-page);
+  animation-timing-function: var(--ease-image);
+}
+
+/* Fill the morphing box and crop like the source image (object-fit: cover)
+   so the focal point stays continuous instead of stretching. */
+::view-transition-old(project-media),
+::view-transition-new(project-media) {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  animation-duration: var(--duration-page);
+  animation-timing-function: var(--ease-image);
+}
+
+/* The image pair carries the clip so the corner radius can animate
+   independently of the UA's size/position animation on the group. */
+::view-transition-image-pair(project-media) {
+  overflow: clip;
+  border-radius: 0;
+}
+
+html[data-transition='project-enter']::view-transition-image-pair(project-media) {
+  animation: vt-radius-collapse var(--duration-page) var(--ease-image) both;
+}
+
+html[data-transition='project-exit']::view-transition-image-pair(project-media) {
+  animation: vt-radius-expand var(--duration-page) var(--ease-image) both;
+}
+
+/* While the image expands, let the rest of the page get out of the way
+   quickly, then bring the case study in once the hero has mostly landed. */
+html[data-transition='project-enter']::view-transition-old(root) {
+  animation: vt-fade-out var(--duration-short) var(--ease-standard) both;
+}
+
+html[data-transition='project-enter']::view-transition-new(root) {
+  animation: vt-fade-up var(--duration-medium) var(--ease-standard) calc(var(--duration-page) * 0.45) both;
+}
+
+html[data-transition='project-exit']::view-transition-old(root) {
+  animation: vt-fade-out calc(var(--duration-short) * 0.8) var(--ease-exit) both;
+}
+
+html[data-transition='project-exit']::view-transition-new(root) {
+  animation: vt-fade-in var(--duration-medium) var(--ease-standard) calc(var(--duration-page) * 0.35) both;
+}
+
+/* Case study title block rises in after the image settles */
+::view-transition-new(case-hero-meta) {
+  animation: vt-fade-up var(--duration-medium) var(--ease-standard) calc(var(--duration-page) * 0.55) both;
+}
+
+::view-transition-old(case-hero-meta) {
+  animation: vt-fade-out var(--duration-micro) var(--ease-exit) both;
+}
+
+/* --- Keyframes --------------------------------------------------------- */
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes vt-radius-collapse {
+  from { border-radius: var(--radius-card); }
+  to { border-radius: 0; }
+}
+
+@keyframes vt-radius-expand {
+  from { border-radius: 0; }
+  to { border-radius: var(--radius-card); }
+}
+
+/* --- Reduced motion ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-image-pair(*) {
+    animation: none !important;
+  }
+}
